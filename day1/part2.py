@@ -17,17 +17,25 @@ NUMBERS = [
 
 def first(line: str) -> str:
     line_as_list = list(line)
+    found_index = len(line)
     for number in NUMBERS:
         if number[0] in line:
-            line_as_list[line.index(number[0])] = number[1]
+            if line.index(number[0]) >= found_index:
+                continue
+            found_index = line.index(number[0])
+            line_as_list[found_index] = number[1]
     return [x for x in line_as_list if x.isdigit()][0]
 
 
 def last(line: str) -> str:
     line_as_list = list(line)
+    found_index = 0
     for number in NUMBERS:
         if number[0] in line:
-            line_as_list[line.rindex(number[0])] = number[1]
+            if line.rindex(number[0]) <= found_index:
+                continue
+            found_index = line.rindex(number[0])
+            line_as_list[found_index] = number[1]
     return [x for x in line_as_list if x.isdigit()][-1]
 
 
